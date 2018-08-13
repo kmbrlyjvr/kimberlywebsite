@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contact</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <section class="header">
+    <header>
+      <div class="container">
+        <nav>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="works.html">Works</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+      </div>
+    </header>
+  </section>
+
+  <div class="kmbrly_logo">
+    <a href="index.html"><img class="logo" src="images/kmbrlyjvrlogonew2-01.png"></a>
+  </div>
+
+<div class="contact_bg"></div>
+<!-- Form -->
+<main>
+  <section class="main_contact">
+      <div class="container">
+          <h1 class="contact_page_title">Show me some love!</h1>
+      </div>
+    </section>
+</main>
+
+<!-- Contact Form -->
+<form class="formular" action="https://www.google.com" method="post">
+     <div class="radio_buttons">
+         <div class="m">
+             <label for="man">Man</label>
+             <input type="radio" name="sex" id="man" />
+         </div>
+         <div class="f">
+             <label for="woman">Woman</label>
+             <input type="radio" name="sex" id="woman" /><br />
+         </div>
+     </div>
+     <label for="name">Name</label>
+     <input type="text" id="name"/><br />
+
+     <label for="email">E-mail</label>
+     <input type="text" id="email"/><br />
+
+     <label for="tel">Phone</label>
+     <input type="text" id="tel"/><br />
+
+     <label for="question">What do you like most?</label>
+     <select name="question_1" id="question">
+     <option value="option1" selected>Designs</option>
+     <option value="option2">Photography</option>
+     <option value="option3">Streetstyle</option>
+     <option value="option4">Sum good ol'Beer</option>
+     </select>
+
+     <div class="newsletter">
+            <label for="newsletter">Newsletter</label>
+            <input type="checkbox" value="newsletter" id="newsletter" /><br />
+     </div>
+     <input type="submit" value="Submit" id="submit"/>
+</form>
+
+
+<footer>
+  <section class="footer">
+    <p>kmbrlyjvr, Copyright &copy; 2017</p>
+  </section>
+</footer>
+
+</body>
+<script>
+       var form = document.querySelector('.formular');
+
+
+
+       form.addEventListener('submit', function(_e){
+         var errorInput="";
+
+
+         var mann = document.querySelector("#man");
+         var frau = document.querySelector("#woman");
+         if(!(mann.checked || frau.checked)){
+           _e.preventDefault();
+           errorInput = errorInput + "Error!Gender not checked. \n";
+         }
+
+
+           var name = document.querySelector("#name").value;
+           if(name.trim() === ""){
+              _e.preventDefault();
+              errorInput = errorInput + "Error!Name is not valid. \n";
+
+           }
+
+           var email= document.querySelector('#email').value;
+
+           if(!(email.indexOf('@') >0 &&
+                email.indexOf('@') +2 < email.length &&
+                email.indexOf('@',email.indexOf('@') +1) === -1
+              )){
+                _e.preventDefault();
+                console.log(errorInput)
+                errorInput = errorInput + "Error!E-mail is not valid. \n";
+           }
+
+           var tel = document.querySelector('#tel').value;
+
+           var tmp='';
+           var isOk = true;
+           var allowedChars = "+0123456789"
+           for(var i=0; i < tel.length;i++){
+               tmp = tel.charAt(i);
+               if( allowedChars.indexOf(tmp) === -1){
+               isOk = false;
+               break;    //schleife wird bei false abgebrochen
+             }
+           }
+           if(
+              !(((tel.indexOf('+') === 0 && tel.indexOf('+',1)=== -1) ||
+                tel.indexOf('+') === -1) &&
+                isOk && tel.length)
+
+         ){
+              _e.preventDefault();
+              errorInput = errorInput + "Error!Telephone number is not valid. \n";
+           }
+
+
+           var checkBox = document.querySelector('#newsletter');
+           if(!(checkBox.checked)){
+              _e.preventDefault();
+              errorInput = errorInput + "Error!Newsletter is not checked. \n";
+           }
+
+           if(errorInput.length){
+              alert(errorInput);
+          }
+
+
+         });
+
+         var tel_input = document.querySelector('#tel');
+         tel_input.addEventListener('keyup', function(_e){
+            var tel = tel_input.value;
+            var allowedChars = "+0123456789";
+            var filtered_tel ="";
+            for(var i=0; i < tel.length;i++){
+                tmp = tel.charAt(i);
+                if( allowedChars.indexOf(tmp) !== -1){
+                    filtered_tel = filtered_tel + tmp;
+                }
+
+            }
+
+            tel_input.value = filtered_tel;
+
+         });
+
+</script>
+
+
+</html>
